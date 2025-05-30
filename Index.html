@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StormX Esports</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background: 007bff;
+      color: #111;
+    }
+    .page {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .page.active {
+      display: flex;
+    }
+    header {
+  background: linear-gradient(to right, #ff416c, #ff4b2b) !important; /* মারাত্মক সুন্দর গ্র্যাডিয়েন্ট কালার */
+  color: #fff !important;
+  text-align: center;
+  width: 100%;
+  padding: 20px 0;
+  font-size: 28px;
+  font-weight: bold;
+}
+    .banner {
+  margin-top: -29px;
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+    }
+    .banner-img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .banner-img.active {
+      opacity: 1;
+      z-index: 1;
+    }
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      width: 100%;
+      max-width: 500px;
+      margin-top: 20px;
+      padding: 0 20px;
+    }
+    .option-box {
+      background: #f9f9f9;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+      transition: 0.3s;
+    }
+    .option-box:hover {
+      background: #f0f0f0;
+      transform: scale(1.03);
+    }
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      width: 100%;
+    }
+    .helpline-link, .register-btn {
+      display: inline-block;
+      font-size: 18px;
+      font-weight: bold;
+      color: #000;
+      text-decoration: none;
+      border: 2px solid #ddd;
+      padding: 10px 18px;
+      border-radius: 10px;
+      margin: 10px;
+      transition: 0.3s;
+    }
+    .helpline-link:hover, .register-btn:hover {
+      background: #f0f0f0;
+    }
+    footer {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #00ffe7;
+  text-align: center;
+  padding: 14px 0;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 -2px 10px #00ffe7;
+  letter-spacing: 1px;
+}
+footer {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 12px 0;
+  width: 100%;
+  font-size: 14px;
+  text-shadow: 0 0 10px #0ff;
+}
+    button {
+      background: #222;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #444;
+    }
+    .match-box {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 15px 0;
+      max-width: 400px;
+      background: #fefefe;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+    .match-box h3 {
+      margin-bottom: 8px;
+    }
+    .match-box .msg {
+      margin-top: 8px;
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Home Page -->
+<div id="home" class="page active">
+  <header>StormX Esports</header>
+  <div class="banner">
+    <img class="banner-img active" src="https://i.postimg.cc/fR9ZxjXH/stormx-1080x600.png" alt="Banner 1">
+  <img class="banner-img" src="https://i.postimg.cc/FRKBxN89/file-00000000da1861f8bc73368e82b40ccc-1.png" alt="Banner 2">
+  <img class="banner-img" src="https://i.postimg.cc/WpYPCfwW/file-0000000039cc61f5a5fd7f9f6929e262.png" alt="Banner 3">
+  </div>
+  <div class="options">
+    <div class="option-box" onclick="showPage('rules')">📜 রুলস</div>
+    <div class="option-box" onclick="showPage('howto')">🎮 কিভাবে খেলবেন</div>
+    <div class="option-box" onclick="showPage('match')">🎯 ম্যাচ</div>
+    <div class="option-box" onclick="showPage('helpline')">🆘 হেল্পলাইন</div>
+  </div>
+  <footer>&copy; ২০২৫ StormX Esports</footer>
+</div>
+
+<!-- Rules Page -->
+<div id="rules" class="page">
+  <header>StormX Esports</header>
+  <div class="content">
+    <h2>📜 ফ্রী ফায়ার রুলস</h2>
+    <p>১.প্লেয়ারদের অবশ্যই ম্যাচ শুরুর ১০ মিনিট আগে অনলাইন হতে হবে। <br>২. রুমআইডি এবং পাসওয়ার্ড ম্যাচ শুরুর ৫ মিনিট আগে WhatsApp/Telegram এ শেয়ার করা হবে।<br>৩.সময়মত রুমে জয়েন না করলে ডিসকোয়ালিফাই করা হবে -- কোন পুনরায় সুযোগ নেই।<br>৪.হ্যাক বা থার্ড পার্টি সফটওয়্যার ব্যবহার করলে ডিসকোয়ালিফাই করা হবে<br>৫.ভুল তথ্য দিয়ে রেজিস্ট্রেশন করা।<br>৬.দলীয়ভাবে অন্য টিমকে সাহায্য করা বা teaming।</p>
+  </div>
+  <footer><button onclick="showPage('home')">🏠 হোম</button></footer>
+</div>
+
+<!-- How to Play Page -->
+<div id="howto" class="page">
+  <header>StormX Esports</header>
+  <div class="content">
+    <h2>🎮 কিভাবে খেলবেন</h2>
+    <p>
+      ১. রেজিস্ট্রেশন করুন এবং হেল্পলাইনে কথা বলুন।<br>
+      ২. নির্ধারিত সময়ে ম্যাচে অংশ নিন।<br>
+      ৩. ম্যাচ শুরুর ৫-১০ মিনিট আগে রুম আইডি এবং পাসওয়ার্ড হোয়াটসঅ্যাপ বা টেলিগ্রাম এ  পাবেন।<br>
+      ৪. রুমে সময়মত জয়েন করুন।</p>
+  </div>
+  <footer><button onclick="showPage('home')">🏠 হোম</button></footer>
+</div>
+
+<!-- Match Page -->
+<div id="match" class="page">
+  <header>StormX Esports</header>
+  <div class="content">
+    <h2>🎯 ম্যাচ নির্বাচন করুন</h2>
+
+    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+      <button onclick="showPage('free')" style="background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 8px; font-size: 16px;">
+        🆓 ফ্রি ম্যাচ
+      </button>
+      <button onclick="showPage('paid')" style="background-color: #ffc107; color: black; padding: 10px 20px; border: none; border-radius: 8px; font-size: 16px;">
+        💰 পেইড ম্যাচ
+      </button>
+    </div>
+
+  </div>
+  <footer><button onclick="showPage('home')">🏠 হোম</button></footer>
+</div>
+
+<!-- Free Match Page -->
+<div id="free" class="page">
+  <header>StormX Esports</header>
+  <div class="content">
+    <div id="matches">
+      <div class="match-box">
+        <h3>ম্যাচ ১ - 🕘 রাত ১০:০০</h3>
+        <p>রেজিস্ট্রেশন: <span id="count1">0</span>/15</p>
+        <button id="btn1">📩 রেজিস্টার করুন</button>
+        <p id="msg1" class="msg"></p>
+      </div>
+      <div class="match-box">
+        <h3>ম্যাচ ২ - 🕥 রাত ১০:৩০</h3>
+        <p>রেজিস্ট্রেশন: <span id="count2">0</span>/15</p>
+        <button id="btn2">📩 রেজিস্টার করুন</button>
+        <p id="msg2" class="msg"></p>
+      </div>
+    </div>
+  </div>
+  <footer><button onclick="showPage('match')">🔙 ব্যাক</button></footer>
+</div>
+
+<!-- Paid Match Page -->
+<div id="paid" class="page">
+  <header>StormX Esports</header>
+  <div class="content">
+    <h2>💰 পেইড ম্যাচ</h2>
+    <p style="font-weight: bold; background: #f0f0f0; padding: 10px; border-radius: 8px;">
+      আপনি যদি পেইড ম্যাচ খেলতে চান তাহলে নিচের দুই আইডিতে এসএমএস করুন।
+    </p>
+    <a class="helpline-link" href="https://wa.me/8801860454653" target="_blank">📱 হেল্পলাইন WhatsApp</a><br>
+    <a class="helpline-link" href="https://t.me/Stesports7" target="_blank">📢 হেল্পলাইন Telegram</a>
+  </div>
+  <footer><button onclick="showPage('match')">🔙 ব্যাক</button></footer>
+</div>
+
+<!-- Helpline Page -->
+<div id="helpline" class="page">
+  <header>StormX Esports</header>
+  <div class="content">
+    <h2>🆘 হেল্পলাইন</h2>
+    <a class="helpline-link" href="https://wa.me/8801860454653" target="_blank">📱 WhatsApp</a><br>
+    <a class="helpline-link" href="https://t.me/Stesports7" target="_blank">📢 Telegram</a>
+  </div>
+  <footer>
+    <button onclick="showPage('home')">🔙 ব্যাক</button>
+  </footer>
+</div>
+
+<!-- JavaScript -->
+<script>
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active');
+  });
+  document.getElementById(pageId).classList.add('active');
+}
+
+// Banner Slider
+let bannerImages = document.querySelectorAll('.banner-img');
+let currentIndex = 0;
+function rotateBanner() {
+  bannerImages.forEach((img, index) => {
+    img.classList.remove('active');
+  });
+  bannerImages[currentIndex].classList.add('active');
+  currentIndex = (currentIndex + 1) % bannerImages.length;
+}
+bannerImages[0].classList.add('active');
+setInterval(rotateBanner, 4000);
+
+// Match registration system
+const today = new Date();
+const currentDay = today.toDateString();
+const lastReset = localStorage.getItem('lastReset');
+
+// Reset counts at midnight
+if (lastReset !== currentDay) {
+  for (let i = 1; i <= 3; i++) {
+    localStorage.removeItem(`match${i}`);
+    localStorage.removeItem(`submitted${i}`);
+  }
+  localStorage.setItem('lastReset', currentDay);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const isFriday = today.getDay() === 5;
+
+  if (isFriday) {
+    const match3Box = document.createElement('div');
+    match3Box.className = 'match-box';
+    match3Box.id = 'match3Box';
+    match3Box.innerHTML = `
+      <h3>ম্যাচ ৩ - 🕚 রাত ১১:০০</h3>
+      <p>রেজিস্ট্রেশন: <span id="count3">0</span>/15</p>
+      <button id="btn3">📩 রেজিস্টার করুন</button>
+      <p id="msg3" class="msg"></p>
+    `;
+    document.getElementById('matches').appendChild(match3Box);
+
+    document.getElementById('btn3').addEventListener('click', () => register(3));
+  }
+
+  // Update match info from localStorage
+  for (let i = 1; i <= 3; i++) {
+    const count = parseInt(localStorage.getItem(`match${i}`) || "0");
+    const submitted = localStorage.getItem(`submitted${i}`);
+    const countSpan = document.getElementById(`count${i}`);
+    const btn = document.getElementById(`btn${i}`);
+    const msg = document.getElementById(`msg${i}`);
+
+    if (countSpan) countSpan.innerText = count;
+    if (btn && msg) {
+      if (submitted === "true") {
+        btn.disabled = true;
+        msg.innerText = "✅ আপনি ইতোমধ্যে রেজিস্টার করেছেন।";
+      } else if (count >= 15) {
+        btn.disabled = true;
+        msg.innerText = "✅ রেজিস্ট্রেশন সম্পন্ন, আর গ্রহণ করা হচ্ছে না।";
+      }
+    }
+  }
+
+  // Attach click listeners for btn1 and btn2 here too (if not inline)
+  document.getElementById('btn1').addEventListener('click', () => register(1));
+  document.getElementById('btn2').addEventListener('click', () => register(2));
+});
+
+function register(matchId) {
+  const limit = 15;
+  const count = parseInt(localStorage.getItem(`match${matchId}`) || "0");
+  const submitted = localStorage.getItem(`submitted${matchId}`);
+
+  if (submitted === "true") {
+    alert("✅ আপনি ইতোমধ্যে রেজিস্টার করেছেন।");
+    return;
+  }
+
+  if (count >= limit) {
+    alert("❌ এই ম্যাচের রেজিস্ট্রেশন সম্পূর্ণ হয়ে গেছে।");
+    return;
+  }
+
+  // ✅ Open Google Form
+  window.open(
+    "https://docs.google.com/forms/d/e/1FAIpQLSdcWrzVcp0jVN00zhhYClTh3y7yK7FF-Jo_fb0vYorljvyuEQ/viewform?usp=header",
+    "_blank"
+  );
+
+  // ✅ Save in localStorage
+  const newCount = count + 1;
+  localStorage.setItem(`match${matchId}`, newCount);
+  localStorage.setItem(`submitted${matchId}`, "true");
+
+  // ✅ Update UI
+  const countSpan = document.getElementById(`count${matchId}`);
+  const btn = document.getElementById(`btn${matchId}`);
+  const msg = document.getElementById(`msg${matchId}`);
+
+  if (countSpan) countSpan.innerText = newCount;
+  if (btn) btn.disabled = true;
+  if (msg) msg.innerText = "✅ আপনি রেজিস্টার করেছেন।";
+}
+</script> 
+</body>  
+</html>  
